@@ -1,10 +1,13 @@
 {% extends "main.html" %}
-
+{% block title %}Home Page{% endblock title %}
 {% block content %}
 <div class="container">
   <h1>Welcome to MyApp!</h1><br>
-    <h2>Login Here!
-    <a class="container" href="{% url 'login' %}">Login</a></h2>
+  {% if request.user.is_authenticated %}
+    <h2><a class="container" href="{% url 'logout' %}">Logout</a>from @{{request.user}}</h2>
+      {% else %}
+      <h2>Login Here!<a class="container" href="{% url 'login' %}">Login</a></h2>
+      {% endif %}
 </div>
 
 {% endblock content %}
