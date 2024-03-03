@@ -1,0 +1,21 @@
+
+{% extends "main.html" %} {% block content %}
+<div class="container w-50">
+<h1>Sign Up:</h1>
+<form method="POST" action="" enctype="multipart/form-data">
+  {% csrf_token %}
+  {% for field in form %}
+
+    <div class="mb-3">
+        {{field.label}} {{field}}
+    </div>
+  {% endfor %}
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<br>
+<h2>Already Sign Up?</h2>
+<a href="{% url 'login' %}">Login</a>
+</div>
+
+{% endblock %}
+
