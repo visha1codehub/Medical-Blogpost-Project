@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
-from .forms import SignUpForm
 from django.http import HttpResponse
+from .forms import SignUpForm
+from .models import CustomUser
 from .decorators import doctor_required
 
 
@@ -49,7 +50,9 @@ def logoutUser(request):
 @login_required(login_url='login')
 @doctor_required
 def doctor_dashboard(request):
-    return render(request, 'myapp/doctor_dashboard.html')
+    user = request.user
+    context = {'user':user}
+    return render(request, 'myapp/doctor_dashboard.html', context)
 
 @login_required(login_url='login')
 def patient_dashboard(request):

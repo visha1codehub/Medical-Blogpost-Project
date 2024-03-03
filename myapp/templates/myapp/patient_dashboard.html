@@ -4,7 +4,21 @@
 
 <div class="container w-50">
 
-    <h1>This is patient dashboard page!</h1>
+    <h1>Welcome Patient!</h1>
+    <div class="card" style="width: 18rem;">
+        <img class="card-img-top" src="{{ user.imageURL }}" alt="user profile">
+        <div class="card-body">
+          <h5 class="card-title">{{user.first_name}} {{user.last_name}}</h5>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Email ID: {{user.email}}</li>
+          <li class="list-group-item">Address Line1: {{user.address_line1}}</li>
+          <li class="list-group-item">City: {{user.city}}</li>
+          <li class="list-group-item">State: {{user.state}}</li>
+          <li class="list-group-item">Pincode: {{user.pincode}}</li>
+        </ul>
+    </div>  
+    <br><br><br>
 </div>
 
 {% endblock content %}
