@@ -1,0 +1,39 @@
+{% extends "main.html" %}
+{% block title %}Patient Dashboard{% endblock title %}
+{% block content %}
+
+<div class="container">
+  {% if q == "" %}
+  <a class="btn btn-secondary" href="{% url 'patient-dashboard' %}">All</a>
+  {% else %}
+  <a class="btn btn-primary" href="{% url 'patient-dashboard' %}">All</a>
+  {% endif %}
+  {% for category in categories %}
+    {% if category.name == q %}
+    <a class="btn btn-secondary" href="{% url 'patient-dashboard' %}?q={{category.name}}">{{category.name}}</a>
+    {% else %}
+    <a class="btn btn-primary" href="{% url 'patient-dashboard' %}?q={{category.name}}">{{category.name}}</a>
+    {% endif %}
+  {% endfor %}
+<br><br>
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="{{ post.imageURL }}" class="card-img-top" alt="{{ post.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">{{ post.summary|truncatewords:15 }}</p>
+          <a href="{% url 'blogpost-detail' post.id %}" class="stretched-link"></a>
+        </div>
+        <div class="card-footer text-muted">
+          Author: {{ post.author.username }}
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+
+{% endblock content %}

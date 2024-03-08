@@ -1,0 +1,20 @@
+{% extends 'main.html' %}
+{% block title %}Delete Blog Post{% endblock title %}
+{% block content %}
+
+
+<div class="container">
+    <div class="row">
+      <div class="col-md-6 offset-md-3">
+        <h2>Delete Blog Post</h2>
+        <p>Are you sure you want to delete the blog post "{{ post.title }}"?</p>
+        <form method="post">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-danger">Delete</button>
+          <a href="{% url 'doctor-dashboard' %}" class="btn btn-secondary">Cancel</a>
+        </form>
+      </div>
+    </div>
+  </div>
+
+{% endblock content %}

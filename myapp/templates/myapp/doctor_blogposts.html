@@ -1,0 +1,32 @@
+{% extends "main.html" %}
+{% block title %}Doctor Dashboard{% endblock title %}
+{% block content %}
+
+<div class="container">
+  <a href="{% url 'create-blogpost' %}" class="btn btn-primary">Create Blogpost</a>
+  <br><br>
+  <div class="row">
+    {% for post in posts %}
+    <div class="col-md-4 mb-3">
+      <div class="card">
+        <img src="{{ post.imageURL }}" class="card-img-top" alt="{{ post.title }}">
+        <div class="card-body">
+          <h5 class="card-title">{{ post.title }}</h5>
+          <p class="card-text">{{ post.summary|truncatewords:15 }}</p>
+          <div class="btn-group" role="group" aria-label="Post Actions">
+            <a href="{% url 'edit-blogpost' post.id %}" class="btn btn-info">Edit</a>
+            <a href="{% url 'delete-blogpost' post.id %}" class="btn btn-danger">Delete</a>
+          </div>
+        </div>
+        {% if post.is_draft %}
+        <div class="card-footer text-muted">
+          Drafted
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+{% endblock content %}
