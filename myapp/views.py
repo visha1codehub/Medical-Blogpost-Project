@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponse
 from .forms import SignUpForm, BlogPostForm
 from .models import CustomUser, BlogPost, Category
 from .decorators import doctor_required
+from .utils import paginatePosts
 
 
 # Create your views here.
@@ -52,7 +54,8 @@ def logoutUser(request):
 def doctor_dashboard(request):
     user = request.user
     posts = user.blogpost_set.all()
-    context = {'user':user, 'posts':posts}
+    posts, ranges = paginatePosts(request, posts)
+    context = {'user':user, 'posts':posts, 'ranges':ranges}
     return render(request, 'myapp/doctor_blogposts.html', context)
 
 @login_required(login_url='login')
@@ -62,7 +65,9 @@ def patient_dashboard(request):
     categories = Category.objects.all()
     q = request.GET.get('q') if request.GET.get('q') != None else ''
     posts = BlogPost.objects.filter(is_draft=False, category__name__icontains=q)
-    context = {'posts' : posts, 'categories' : categories, 'q' : q}
+    posts, ranges = paginatePosts(request, posts)
+    
+    context = {'posts' : posts, 'categories' : categories, 'q' : q, 'ranges':ranges}
     return render(request, 'myapp/blogpost_list.html', context)
 
 @login_required(login_url='login')

@@ -1,13 +1,25 @@
 {% extends "main.html" %}
 {% block title %}Home Page{% endblock title %}
+{% block style %}
+    <style>
+        .container-border {
+          border: 2px solid #01070c; /* Border color */
+          border-radius: 10px; /* Border radius */
+          padding: 20px; /* Padding */
+        }
+      </style>
+{% endblock style %}
 {% block content %}
-<div class="container">
-  <h1>Welcome to MyApp!</h1><br>
-  {% if request.user.is_authenticated %}
-    <h2><a class="container" href="{% url 'logout' %}">Logout</a>from @{{request.user}}</h2>
-      {% else %}
-      <h2>Login Here!<a class="container" href="{% url 'login' %}">Login</a></h2>
-      {% endif %}
-</div>
+<div class="container container-border w-50">
+    <p> <strong>Welcome to our website</strong> , a vibrant online platform dedicated to health and wellness. Here, we curate an extensive array of insightful blog posts covering various facets of health, from mental well-being to physical fitness, aimed at fostering a community of informed individuals eager to enhance their overall quality of life. Our website serves as a comprehensive resource hub, offering an assortment of meticulously crafted articles penned by medical professionals and health enthusiasts. Dive into our rich repository of content, where you'll find thought-provoking discussions on topics such as coping mechanisms for stress, dietary tips for a balanced lifestyle, updates on the latest medical research, and practical advice on preventive healthcare measures. Whether you're seeking inspiration to embark on a fitness journey, craving reliable information to navigate through health challenges, or simply looking to stay informed about emerging health trends, our website is your go-to destination. Join us in our mission to empower individuals with the knowledge and tools they need to lead healthier, happier lives.</p>
 
+  </div>
+  <br>
+  <div class="container w-50">
+  {% if request.user.is_authenticated %}
+    {% else %}
+    <h4>Proceed to<a class="container" href="{% url 'login' %}">Login</a>
+    or <a class="container" href="{% url 'signup' %}">Signup</a>...</h4>
+    {% endif %}
+  </div>
 {% endblock content %}
