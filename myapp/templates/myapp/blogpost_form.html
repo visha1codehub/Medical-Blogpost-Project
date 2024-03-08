@@ -6,6 +6,8 @@
 
 <div class="container w-50">
     <h1>Create Blog-Post:</h1>
+    <a href="{% url 'doctor-dashboard' %}" class="btn btn-outline-secondary"><i class="fas fa-arrow-left"></i> Back</a>
+    <br><br>
     <form method="POST" action="" enctype="multipart/form-data">
       {% csrf_token %}
       {% for field in form %}
