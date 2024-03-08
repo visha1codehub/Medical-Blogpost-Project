@@ -9,7 +9,12 @@
   </div>
   <br>
   <div class="container w-50">
-  {% if request.user.is_authenticated %}
+    {% if request.user.is_authenticated %}
+      {% if request.user.user_type == 'doctor' %}
+      <h4>Go to  <a href="{% url 'doctor-dashboard' %}">Doctor Dashboard</a>....</h4>
+      {% else %}
+      <h4>Go to  <a href="{% url 'patient-dashboard' %}">Patient Dashboard</a>....</h4>
+      {% endif %}
     {% else %}
     <h4>Proceed to<a class="container" href="{% url 'login' %}">Login</a>
     or <a class="container" href="{% url 'signup' %}">Signup</a>...</h4>

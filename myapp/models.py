@@ -42,6 +42,9 @@ class BlogPost(models.Model):
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     is_draft = models.BooleanField(default=False)
     
+    class Meta:
+        ordering = ['-id']
+    
     @property
     def imageURL(self):
         try:

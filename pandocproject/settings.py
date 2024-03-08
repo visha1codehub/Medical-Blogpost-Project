@@ -78,10 +78,15 @@ AUTH_USER_MODEL = 'myapp.CustomUser'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'banaotech',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'localhost',   # Or your MySQL server's hostname
+        'PORT': '3306',        # Default MySQL port
     }
 }
+
 
 
 # Password validation

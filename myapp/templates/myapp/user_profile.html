@@ -3,7 +3,7 @@
 {% block content %}
 
 <div class="container container-border">
-    <a href="{{request.GET.next}}" class="btn btn-outline-secondary"> Back</a>
+    <a href="{{request.META.HTTP_REFERER}}" class="btn btn-outline-secondary"> Back</a>
       <br><br>
       <div class="row">
         <div class="col-md-8 offset-md-2">
