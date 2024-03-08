@@ -1,0 +1,28 @@
+{% extends 'main.html' %}
+{% block title %}Your Profile{% endblock title %}
+{% block content %}
+
+<div class="container container-border">
+    <a href="{{request.GET.next}}" class="btn btn-outline-secondary"> Back</a>
+      <br><br>
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+          <div>
+            <div class="text-center">
+              <h2>{{ user.first_name }} {{user.last_name}}</h2>
+              <br>
+              <img src="{{ user.imageURL }}" class="rounded" alt="{{user.username}}" height="200">
+              <br><br>
+              <p><strong>Email Id:</strong> {{ user.email }}</p>
+              <p><strong>Address Line1:</strong> {{ user.address_line1 }}</p>
+              <p><strong>State:</strong> {{ user.state }}</p>
+              <p><strong>City:</strong> {{ user.city }}</p>
+              <p><strong>Pincode:</strong> {{ user.pincode }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+
+{% endblock content %}

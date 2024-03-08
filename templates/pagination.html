@@ -3,7 +3,7 @@
 
     {% if query_set.has_previous %}
       <li class="page-item">
-        <a class="page-link" href="?page={{query_set.previous_page_number}}" tabindex="-1">Prev</a>
+        <a class="page-link" href="?{% if q %}q={{q}}&{% endif %}page={{query_set.previous_page_number}}" tabindex="-1">Prev</a>
       </li>
       {% else %}
       <li class="page-item disabled">
@@ -13,16 +13,16 @@
  
       {% for page in ranges %}
       {% if page == query_set.number %}
-      <li class="page-item"><a class="page-link" href="?page={{page}}" style="background-color: rgb(18, 21, 171); color: aliceblue;">{{page}}</a></li>
+      <li class="page-item"><a class="page-link" href="?{% if q %}q={{q}}&{% endif %}page={{page}}" style="background-color: rgb(18, 21, 171); color: aliceblue;">{{page}}</a></li>
       {% else %}
-      <li class="page-item"><a class="page-link " href="?page={{page}}">{{page}}</a></li>
+      <li class="page-item"><a class="page-link" href="?{% if q %}q={{q}}&{% endif %}page={{page}}">{{page}}</a></li>
       {% endif %}
       {% endfor %}
 
 
       {% if query_set.has_next %}
       <li class="page-item">
-        <a class="page-link" href="?page={{query_set.next_page_number}}">Next</a>
+        <a class="page-link" href="?{% if q %}q={{q}}&{% endif %}page={{query_set.next_page_number}}">Next</a>
       </li>
       {% else %}
       <li class="page-item disabled">

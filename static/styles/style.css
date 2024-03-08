@@ -1,3 +1,9 @@
 .card {
     width: 350px; /* Adjust the width as needed */
   }
+
+  .container-border {
+    border: 2px solid #01070c; /* Border color */
+    border-radius: 10px; /* Border radius */
+    padding: 20px; /* Padding */
+  }

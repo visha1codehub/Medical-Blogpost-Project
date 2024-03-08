@@ -125,5 +125,10 @@ def delete_blogpost(request, pk):
     context = {'post':post}
     return render(request, 'myapp/delete_blogpost.html', context)
     
-        
-    
+@login_required(login_url='login')
+def user_profile(request, pk):
+    user = CustomUser.objects.get(id=pk)
+    if user != request.user:
+        return HttpResponse('You are not allowed here!!')
+    context = {'user':user}
+    return render(request, 'myapp/user_profile.html', context)
