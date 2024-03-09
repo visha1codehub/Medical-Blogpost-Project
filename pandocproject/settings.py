@@ -33,7 +33,7 @@ DEBUG = env('DEBUG_VALUE') == 'True'
 
 # print(type(DEBUG), env('DEBUG_VALUE'))
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
