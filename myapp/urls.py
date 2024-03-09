@@ -16,6 +16,6 @@ urlpatterns = [
     path('blogpost-detail/<int:pk>/', views.blogpost_detail, name="blogpost-detail"),
     path('user-profile/<int:pk>/', views.user_profile, name="user-profile"),
 ]
-
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

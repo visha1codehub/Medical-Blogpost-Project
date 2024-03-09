@@ -25,9 +25,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = env('SECRET_KEY')
-
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = env('DEBUG')
+
+
+
+DEBUG = env('DEBUG_VALUE') == 'True'
+
+# print(type(DEBUG), env('DEBUG_VALUE'))
 
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
 
@@ -38,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'whitenoise.runserver_nostatic',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
@@ -156,10 +161,12 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH')
+AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH_VALUE') == 'True'
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
 AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
 AWS_S3_ADDRESSING_STYLE = env('AWS_S3_ADDRESSING_STYLE')
+AWS_S3_FILE_OVERWRITE = env('AWS_S3_FILE_OVERWRITE_VALUE') == 'True'
 
+# print(type(AWS_QUERYSTRING_AUTH), AWS_QUERYSTRING_AUTH)
