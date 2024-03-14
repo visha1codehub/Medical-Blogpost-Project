@@ -11,13 +11,15 @@
               <h2>Appointment Details</h2>
                 <br><br>
                 {% if request.user.user_type == 'patient' %}
-                <p><strong>Doctor Name:</strong> {{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</p>
+                <p><strong>Doctor Name:</strong> {{ appointment.doctor.full_name }}</p>
                 {% else %}
-                <p><strong>Patient Name:</strong> {{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</p>
+                <p><strong>Patient Name:</strong> {{ appointment.patient.full_name }}</p>
                 {% endif %}
+                <p><strong>Speciality:</strong> {{ appointment.speciality }}</p>
                 <p><strong>Appointment Date:</strong> {{ appointment.date }}</p>
                 <p><strong>Appointment Start Time:</strong> {{ appointment.start_time }}</p>
                 <p><strong>Appointment End Time:</strong> {{ appointment.end_time }}</p>
+                <p><strong>Booked at :</strong> {{ appointment.created_time }}</p>
                 <a href="{% url 'patient-dashboard' %}" class="btn btn-outline-secondary">Go to Dashboard</a>
         </div>
       </div>

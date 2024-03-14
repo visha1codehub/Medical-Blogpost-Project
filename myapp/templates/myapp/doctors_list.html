@@ -21,7 +21,7 @@
           <img src="{{ doctor.imageURL }}" class="card-img-top card-img-fixed" alt="{{ doctor.username }}">
           <div class="card-body">
             <br>
-            <h5 class="card-title">{{ doctor.first_name }} {{ doctor.last_name }}</h5>
+            <h5 class="card-title">{{ doctor.full_name }}</h5>
             <br>
             <a href="{% url 'appointment-form' doctor.id %}" class="btn btn-primary">Book Appoinment</a>
           </div>

@@ -42,7 +42,7 @@ def create_event(appointment):
   date = appointment.date
   start_time = appointment.start_time
   end_time = appointment.end_time
-  summary = appointment.patient.full_name
+  summary = f'{appointment.patient.full_name} {appointment.speciality}'
   start_datetime_iso = datetime.combine(date, start_time).isoformat()
   end_datetime_iso = datetime.combine(date, end_time).isoformat()
   calendar_id = appointment.doctor.calendar_id

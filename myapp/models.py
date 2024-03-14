@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from datetime import timedelta, datetime, date
+from datetime import timedelta, datetime, date, time
+from django.utils import timezone
 from myapp.calendar_api import api_calender
 # Create your models here.
 
@@ -77,7 +78,8 @@ class Appointment(models.Model):
     speciality = models.CharField(max_length=200)
     date = models.DateField()
     start_time = models.TimeField()
-    end_time = models.TimeField(default=datetime.now())
+    end_time = models.TimeField(default=time(hour=0, minute=0))
+    created_time = models.DateTimeField(auto_now_add=True, null=True)
 
 
     def save(self, *args, **kwargs):
