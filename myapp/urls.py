@@ -15,6 +15,10 @@ urlpatterns = [
     path('delete-blogpost/<int:pk>/', views.delete_blogpost, name='delete-blogpost'),
     path('blogpost-detail/<int:pk>/', views.blogpost_detail, name="blogpost-detail"),
     path('user-profile/<int:pk>/', views.user_profile, name="user-profile"),
+    path('doctors-list/', views.doctors_list, name="doctors-list"),
+    path('appointment-form/<int:doc_id>/', views.appointment_form, name='appointment-form'),
+    path('appointment-detail/<int:pk>/', views.appointment_detail, name='appointment-detail'),
+    path('appointment-list/', views.appointment_list, name='appointment-list'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

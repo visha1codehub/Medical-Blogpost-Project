@@ -1,0 +1,27 @@
+{% extends 'main.html' %}
+{% block title %}Appoinments List{% endblock title %}
+
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        {% for appointment in appointments %}
+        <div class="col-md-4 mb-3">
+          <div class="card">
+            <div class="card-body">
+                {% if request.user.user_type == 'patient' %}
+              <h5 class="card-title">{{ appointment.doctor.first_name }} {{ appointment.doctor.last_name }}</h5>
+              {% else %}
+              <h5 class="card-title">{{ appointment.patient.first_name }} {{ appointment.patient.last_name }}</h5>
+              {% endif %}
+              <p class="card-text">{{ appointment.date }}</p>
+              <a href="{% url 'appointment-detail' appointment.id %}" class="stretched-link"></a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+</div>
+
+{% endblock content %}

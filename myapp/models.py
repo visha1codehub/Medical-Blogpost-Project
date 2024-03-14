@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-
+from datetime import timedelta, datetime, date
+from myapp.calendar_api import api_calender
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -17,7 +18,19 @@ class CustomUser(AbstractUser):
     city = models.CharField(max_length=200)
     state = models.CharField(max_length=200)
     pincode = models.CharField(max_length=20)
-    
+    calendar_id = models.CharField(max_length=250, null=True, blank=True)
+
+
+    def save(self, *args, **kwargs):
+        if self.user_type=='doctor' and not self.calendar_id:
+            created_id = api_calender.create_calendar_id(f"{self.first_name} {self.last_name}")
+            self.calendar_id = created_id if created_id != None else ""
+        super().save(*args, **kwargs)
+
+    @property
+    def full_name(self):
+        return f'{self.first_name} {self.last_name}'
+
     @property
     def imageURL(self):
         try:
@@ -25,8 +38,8 @@ class CustomUser(AbstractUser):
         except:
             url = ''
         return url
-        
-        
+
+
 class Category(models.Model):
     name = models.CharField(max_length=100)
 
@@ -41,10 +54,10 @@ class BlogPost(models.Model):
     content = models.TextField(null=True, blank=True)
     author = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
     is_draft = models.BooleanField(default=False)
-    
+
     class Meta:
         ordering = ['-id']
-    
+
     @property
     def imageURL(self):
         try:
@@ -52,10 +65,26 @@ class BlogPost(models.Model):
         except:
             url = ''
         return url
-        
+
 
     def __str__(self):
         return self.title
-    
 
+
+class Appointment(models.Model):
+    doctor = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='doc_appointments')
+    patient = models.ForeignKey(CustomUser, on_delete=models.CASCADE)
+    speciality = models.CharField(max_length=200)
+    date = models.DateField()
+    start_time = models.TimeField()
+    end_time = models.TimeField(default=datetime.now())
+
+
+    def save(self, *args, **kwargs):
+        start = datetime.combine(date.today(), self.start_time)
+        self.end_time = (start + timedelta(minutes=45)).time()
+        super().save(*args, **kwargs)
+
+    def __str__(self):
+        return f"{self.speciality} - {self.date} - {self.start_time} to {self.end_time}"
 
