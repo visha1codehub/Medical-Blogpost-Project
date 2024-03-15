@@ -25,9 +25,10 @@ def RedirectOauthView(request):
     USER = request.user
     token = USER.token
     if token:
-        return HttpResponseRedirect("https://calendar.google.com/calendar/u/2/r")
+        return HttpResponseRedirect("https://calendar.google.com/calendar")
     oauth_url = google_apis_oauth.get_authorization_url(
         JSON_FILEPATH, SCOPES, REDIRECT_URI)
+    print(oauth_url)
     return HttpResponseRedirect(oauth_url)
 
 
@@ -44,7 +45,7 @@ def CallbackView(request):
     # print(user.id)
     USER.token = stringified_token
     USER.save()
-    return HttpResponseRedirect("https://calendar.google.com/calendar/u/2/r")
+    return HttpResponseRedirect("https://calendar.google.com/calendar")
 
 
 
