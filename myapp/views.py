@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, HttpResponseRedirect
 from django.contrib.auth import login, logout, authenticate
 from django.contrib.auth.decorators import login_required
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -6,13 +6,50 @@ from django.http import HttpResponse
 from .forms import SignUpForm, BlogPostForm, AppointmentForm
 from .models import CustomUser, BlogPost, Category, Appointment
 from .decorators import doctor_required, patient_required
-from .utils import paginatePosts
-from .calendar_api import api_calender
+from .utils import paginatePosts, createEvent
+
+import os
+import google_apis_oauth
+from googleapiclient.discovery import build
+import datetime
+
+
+REDIRECT_URI = 'http://localhost:8000/google_oauth/callback/'
+
+SCOPES = ['https://www.googleapis.com/auth/calendar']
+
+JSON_FILEPATH = os.path.join(os.getcwd(), 'client_id.json')
+USER = ""
+def RedirectOauthView(request):
+    global USER
+    USER = request.user
+    token = USER.token
+    if token:
+        return HttpResponseRedirect("https://calendar.google.com/calendar/u/2/r")
+    oauth_url = google_apis_oauth.get_authorization_url(
+        JSON_FILEPATH, SCOPES, REDIRECT_URI)
+    return HttpResponseRedirect(oauth_url)
+
+
+def CallbackView(request):
+    # Get user credentials
+    credentials = google_apis_oauth.get_crendentials_from_callback(
+        request,
+        JSON_FILEPATH,
+        SCOPES,
+        REDIRECT_URI
+    )
+    # Stringify credentials for storing them in the DB
+    stringified_token = google_apis_oauth.stringify_credentials(credentials)
+    # print(user.id)
+    USER.token = stringified_token
+    USER.save()
+    return HttpResponseRedirect("https://calendar.google.com/calendar/u/2/r")
+
 
 
 def home(request):
     return render(request, 'myapp/home.html')
-
 
 
 def signupPage(request):
@@ -183,7 +220,7 @@ def appointment_form(request, doc_id):
             appointment.doctor = doctor
             appointment.patient = patient
             appointment.save()
-            api_calender.create_event(appointment)
+            createEvent(appointment)
             return redirect('appointment-detail',pk=appointment.id)
     context = {'form':form}
     return render(request, 'myapp/appointment_form.html', context)

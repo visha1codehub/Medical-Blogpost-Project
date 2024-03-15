@@ -16,6 +16,8 @@ import environ
 env = environ.Env()
 environ.Env.read_env()
 
+import os
+os.environ['OAUTHLIB_INSECURE_TRANSPORT'] = '1'
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -87,29 +89,29 @@ AUTH_USER_MODEL = 'myapp.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         'NAME': env('DATABASE_NAME'),
-#         'USER': env('DATABASE_USER'),
-#         'PASSWORD': env('DATABASE_PASSWORD'),
-#         'HOST': env('DATABASE_HOST'),   # Or your MySQL server's hostname
-#         'PORT': env('DATABASE_PORT'),
-#         "OPTIONS": {
-#             'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
-#         }
-#     }
-# }
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'banaotech',
-        'USER' : 'root',
-        'PASSWORD' : 'root',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': env('DATABASE_NAME'),
+        'USER': env('DATABASE_USER'),
+        'PASSWORD': env('DATABASE_PASSWORD'),
+        'HOST': env('DATABASE_HOST'),   # Or your MySQL server's hostname
+        'PORT': env('DATABASE_PORT'),
+        "OPTIONS": {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+        }
     }
 }
+# DATABASES = {
+#     'default': {
+#         'ENGINE' : 'django.db.backends.mysql',
+#         'NAME' : 'banaotech',
+#         'USER' : 'root',
+#         'PASSWORD' : 'root',
+#         'HOST' : 'localhost',
+#         'PORT' : '3306',
+#     }
+# }
 
 
 # Password validation

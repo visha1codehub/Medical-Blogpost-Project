@@ -2,7 +2,6 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser
 from datetime import timedelta, datetime, date, time
 from django.utils import timezone
-from myapp.calendar_api import api_calender
 # Create your models here.
 
 class CustomUser(AbstractUser):
@@ -19,14 +18,7 @@ class CustomUser(AbstractUser):
     city = models.CharField(max_length=200)
     state = models.CharField(max_length=200)
     pincode = models.CharField(max_length=20)
-    calendar_id = models.CharField(max_length=250, null=True, blank=True)
-
-
-    def save(self, *args, **kwargs):
-        if self.user_type=='doctor' and not self.calendar_id:
-            created_id = api_calender.create_calendar_id(f"{self.first_name} {self.last_name}")
-            self.calendar_id = created_id if created_id != None else ""
-        super().save(*args, **kwargs)
+    token = models.CharField(max_length=1500, null=True, blank=True)
 
     @property
     def full_name(self):

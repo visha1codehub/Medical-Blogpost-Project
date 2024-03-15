@@ -16,7 +16,7 @@
           </li>
           {% else %}
           <li class="nav-item">
-            <a class="nav-link active" href="https://calendar.google.com/calendar/embed?src={{request.user.calendar_id}}&ctz=Asia%2FKolkata" target="_blank">Calendar</a>
+            <a class="nav-link active" href="{% url 'redir' %}" target="_blank">Calendar</a>
           </li>
           {% endif %}
           <li class="nav-item">
