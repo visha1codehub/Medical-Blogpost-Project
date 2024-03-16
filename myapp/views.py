@@ -11,7 +11,6 @@ from .utils import paginatePosts, createEvent
 import os
 import google_apis_oauth
 from googleapiclient.discovery import build
-import datetime
 
 
 REDIRECT_URI = 'http://localhost:8000/google_oauth/callback/'
