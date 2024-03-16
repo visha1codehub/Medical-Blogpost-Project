@@ -1,8 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from datetime import timedelta, datetime, date, time
-from django.utils import timezone
-# Create your models here.
 
 class CustomUser(AbstractUser):
     USER_TYPE_CHIOCE = (

@@ -1,9 +1,8 @@
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
-from .models import BlogPost
 import os
 import google_apis_oauth
 from googleapiclient.discovery import build
-from datetime import datetime, timedelta
+from datetime import datetime
 
 
 def paginatePosts(request, posts):
