@@ -8,6 +8,7 @@ Django==4.2.11
 django-cors-headers==4.3.1
 django-environ==0.11.2
 django-storages==1.14.2
+fire==0.6.0
 google-api-core==2.17.1
 google-api-python-client==2.122.0
 google-apis-oauth-django==1.0.0
@@ -32,6 +33,7 @@ rsa==4.9
 s3transfer==0.10.0
 six==1.16.0
 sqlparse==0.4.4
+termcolor==2.4.0
 typing_extensions==4.10.0
 uritemplate==4.1.1
 urllib3==2.0.7
