@@ -14,4 +14,3 @@ def paginatePosts(request, posts):
     ranges = range(1, paginator.num_pages+1)
 
     return posts, ranges
-
