@@ -49,6 +49,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'myapp',
+    'user',
+    'appointment',
     'storages',
 ]
 
@@ -85,7 +87,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pandocproject.wsgi.application'
 
-AUTH_USER_MODEL = 'myapp.CustomUser'
+AUTH_USER_MODEL = 'user.CustomUser'
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -102,16 +104,24 @@ AUTH_USER_MODEL = 'myapp.CustomUser'
 #         }
 #     }
 # }
+# DATABASES = {
+#     'default': {
+#         'ENGINE' : 'django.db.backends.mysql',
+#         'NAME' : 'banaotech',
+#         'USER' : 'root',
+#         'PASSWORD' : 'root',
+#         'HOST' : 'localhost',
+#         'PORT' : '3306',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE' : 'django.db.backends.mysql',
-        'NAME' : 'banaotech',
-        'USER' : 'root',
-        'PASSWORD' : 'root',
-        'HOST' : 'localhost',
-        'PORT' : '3306',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
 
 
 # Password validation
@@ -168,16 +178,16 @@ STATIC_ROOT = BASE_DIR / "staticfiles"
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+# DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
-AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH_VALUE') == 'True'
-AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
-AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
-AWS_S3_ADDRESSING_STYLE = env('AWS_S3_ADDRESSING_STYLE')
-AWS_S3_FILE_OVERWRITE = env('AWS_S3_FILE_OVERWRITE_VALUE') == 'True'
+# AWS_QUERYSTRING_AUTH = env('AWS_QUERYSTRING_AUTH_VALUE') == 'True'
+# AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+# AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+# AWS_STORAGE_BUCKET_NAME = env('AWS_STORAGE_BUCKET_NAME')
+# AWS_S3_REGION_NAME = env('AWS_S3_REGION_NAME')
+# AWS_S3_ADDRESSING_STYLE = env('AWS_S3_ADDRESSING_STYLE')
+# AWS_S3_FILE_OVERWRITE = env('AWS_S3_FILE_OVERWRITE_VALUE') == 'True'
 
 # print(type(AWS_QUERYSTRING_AUTH), AWS_QUERYSTRING_AUTH)
